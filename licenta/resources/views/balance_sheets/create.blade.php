@@ -2,6 +2,12 @@
 
     <div class="card m-3">
         <div class="card-body">
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             @error('year_id')
             <div class="alert alert-danger" role="alert">
                 You must choose a year!
@@ -22,7 +28,7 @@
             @enderror
             <div class="form-group">
                 <label for="excel-file" class="form-label">Choose Balance Sheet File</label>
-                <input class="form-control-file" type="file" id="excel-file" accept=".xlsx, .xls" />
+                <input class="form-control-file btn btn-primary" type="file" id="excel-file" accept=".xlsx, .xls" />
             </div>
             <form action="{{ route('balanceSheets.store',['company' => $company->id]) }}" method="POST"
                   enctype="multipart/form-data">

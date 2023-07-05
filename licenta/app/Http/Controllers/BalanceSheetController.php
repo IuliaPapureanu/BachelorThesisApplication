@@ -42,7 +42,7 @@ class BalanceSheetController extends Controller
     public function store(Company $company, CreateBalanceSheetsRequest $request){
         $duplicate = BalanceSheet::hasDuplicate($request->year_id,$request->month_id,$company->id);
         if ($duplicate == true)
-            return redirect()->route('balanceSheets.create', ['company' => $company->id])->with('message', 'Balance sheet for this year and month already exists');
+            return redirect()->route('balanceSheets.create', ['company' => $company->id])->with('error', 'Balance sheet for this year and month already exists');;
 
         $b = BalanceSheet::create([
             'company_id'=> $company->id,

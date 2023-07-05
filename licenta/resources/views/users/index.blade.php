@@ -39,6 +39,19 @@
                         </form>
                     </div>
                     @endif
+
+                    @if($user->level==2)
+                            <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" name="submit" value="submit" class="btn btn-outline-danger m-2"
+                                        onclick="return confirm('Are you sure you want to deny access to this user?')">
+                                    Remove User Acess
+                                </button>
+                            </form>
+                        @endif
+
+
 {{--                    <div class="dropdown">--}}
 {{--                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>--}}
 {{--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
