@@ -13,9 +13,37 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        Home
                     </x-nav-link>
                 </div>
+                @if(Auth::user()->level < 3)
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
+                        Companies
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.index')">
+                        Tags
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('messages.create')" :active="request()->routeIs('messages.create')">
+                        Messages
+                    </x-nav-link>
+                </div>
+                @endif
+
+                @if(Auth::user()->level ==1)
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            Users
+                        </x-nav-link>
+                    </div>
+                @endif
+
+
             </div>
 
             <!-- Settings Dropdown -->

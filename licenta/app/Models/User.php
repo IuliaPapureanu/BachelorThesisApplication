@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'level'
     ];
 
     /**
@@ -41,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getUsers(){
+        return self::orderByDesc('id');
+    }
+
+    public static function getApprovedUsers(){
+        return self::getUsers()->whereNotIn('level', [1]);
+    }
 }
