@@ -36,9 +36,14 @@
                 @endif
 
                 @if(Auth::user()->level ==1)
+
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            @if(\App\Models\User::UnaprovedExists())
+                                <div style=" color: red; font-weight: bold;"> Users </div>
+                            @else
                             Users
+                            @endif
                         </x-nav-link>
                     </div>
                 @endif

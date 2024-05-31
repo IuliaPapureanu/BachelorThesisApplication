@@ -50,4 +50,13 @@ class User extends Authenticatable
     public static function getApprovedUsers(){
         return self::getUsers()->whereNotIn('level', [1]);
     }
+    public static function UnaprovedExists(){
+        $unaproved = self::getUsers()->where('level', 3)->get();
+//        dd($unaproved);
+        if($unaproved->isNotEmpty())
+            return true;
+        return false;
+
+    }
+
 }

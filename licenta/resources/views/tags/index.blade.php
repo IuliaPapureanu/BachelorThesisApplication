@@ -4,9 +4,12 @@
         Add Tag
     </a>
     <h2>Tags</h2>
+    <div class="row">
     @foreach($tags as $tag)
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-secondary active">{{$tag->name}}</button>
+{{--        <div class="btn-group" role="group">--}}
+    <div class="card col-lg-3 d-flex m-2">
+
+            <div class="card-header">{{$tag->name}}</div>
 {{--            <form action="{{ route('tags.destroy',$tag->id) }}" method="POST">--}}
 {{--                @csrf--}}
 {{--                @method('DELETE')--}}
@@ -43,8 +46,9 @@
                     </a>
                 </div>
             </div>
-        </div>
-
+{{--        </div>--}}
+    </div>
     @endforeach
+    </div>
 
 </x-layouts.backend>

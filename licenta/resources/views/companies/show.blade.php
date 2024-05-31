@@ -158,18 +158,10 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-header">Tags </h5>
-{{--                    <div class="btn-group" role="group" aria-label="Basic example">--}}
-{{--                        <button type="button" class="btn btn-primary">Left</button>--}}
-{{--                        <button type="button" class="btn btn-primary">Middle</button>--}}
-{{--                    </div>--}}
-
                     @foreach($allTagsOfCompany as $tag)
-                        <h2>
                         <div class="d-flex align-items-center m-2">
-{{--                            <button type="button" class="btn btn-secondary active">--}}
-{{--                                {{$tag->name}}--}}
-{{--                            </button>--}}
                             <span class="mr-2">{{$tag->name}}</span>
+{{--                            @dd($company->id,$tag->id)--}}
                             <form action="{{ route('companies.unassignTag',['company' => $company->id,'tag'=>$tag->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -179,7 +171,6 @@
                                 </button>
                             </form>
                         </div>
-                        </h2>
                     @endforeach
                 </div>
 

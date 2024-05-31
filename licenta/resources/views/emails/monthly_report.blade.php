@@ -34,68 +34,70 @@
 
             {{--            REPORT CHART--}}
             <div class="row">
-                <div class="col-lg-9">
-                    <canvas id="myChart"></canvas>
-                    <script>
-                        // Sample data for 12 months
-                        {{--const data1 = [{{$balanceSheetsByMonth[1]['income'] ?? 0}}, {{$balanceSheetsByMonth[2]['income'] ?? 0}}, 15, 25, 30, 22, 18, 12, 8, 16, 28, 14];--}}
+            <div class="col-lg-9">
+{{--                REPORT--}}
+                <canvas id="myChart"></canvas>
 
-                        const data1 = [
-                            @for($i = 1; $i <= 12; $i++)
-                                {{ $balanceSheetsByMonth[$i]['income'] ?? null }},
-                            @endfor
-                        ];
-                        // const data2 = [5, 12, 8, 18, 20, 15, 10, 8, 6, 12, 24, 10];
-                        const data2 = [
-                            @for($i = 1; $i <= 12; $i++)
-                                {{ $balanceSheetsByMonth[$i]['profit'] ?? null }},
-                            @endfor
-                        ];
-                        // const data3 = [5, 8, 7, 7, 10, 7, 8, 4, 2, 4, 4, 4];
-                        const data3 = [
-                            @for($i = 1; $i <= 12; $i++)
-                                {{ $balanceSheetsByMonth[$i]['expenses'] ?? null }},
-                            @endfor
-                        ];
-                        // Get the canvas element
-                        const ctx = document.getElementById('myChart').getContext('2d');
+                <script>
+                    // Sample data for 12 months
+                    {{--const data1 = [{{$balanceSheetsByMonth[1]['income'] ?? 0}}, {{$balanceSheetsByMonth[2]['income'] ?? 0}}, 15, 25, 30, 22, 18, 12, 8, 16, 28, 14];--}}
 
-                        // Create the chart
-                        new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                                datasets: [{
-                                    label: 'Profit/Loss',
-                                    data: data2,
-                                    fill: false,
-                                    borderColor: 'rgba(75, 192, 192, 1)', // Customize the line color
-                                    tension: 0.2 // Adjust the line curve
-                                }, {
-                                    label: 'Total Income',
-                                    data: data1,
-                                    fill: false,
-                                    borderColor: 'rgb(100,192,75)', // Customize the line color
-                                    tension: 0.2 // Adjust the line curve
-                                },{
-                                    label: 'Total Expenses',
-                                    data: data3,
-                                    fill: false,
-                                    borderColor: 'rgb(192,75,93)', // Customize the line color
-                                    tension: 0.2 // Adjust the line curve
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
+                    const data1 = [
+                        @for($i = 1; $i <= 12; $i++)
+                            {{ $balanceSheetsByMonth[$i]['income'] ?? null }},
+                        @endfor
+                    ];
+                    // const data2 = [5, 12, 8, 18, 20, 15, 10, 8, 6, 12, 24, 10];
+                    const data2 = [
+                        @for($i = 1; $i <= 12; $i++)
+                            {{ $balanceSheetsByMonth[$i]['profit'] ?? null }},
+                        @endfor
+                    ];
+                    // const data3 = [5, 8, 7, 7, 10, 7, 8, 4, 2, 4, 4, 4];
+                    const data3 = [
+                        @for($i = 1; $i <= 12; $i++)
+                            {{ $balanceSheetsByMonth[$i]['expenses'] ?? null }},
+                        @endfor
+                    ];
+                    // Get the canvas element
+                    const ctx = document.getElementById('myChart').getContext('2d');
+
+                    // Create the chart
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                            datasets: [{
+                                label: 'Profit/Loss',
+                                data: data2,
+                                fill: false,
+                                borderColor: 'rgba(75, 192, 192, 1)', // Customize the line color
+                                tension: 0.2 // Adjust the line curve
+                            }, {
+                                label: 'Total Income',
+                                data: data1,
+                                fill: false,
+                                borderColor: 'rgb(100,192,75)', // Customize the line color
+                                tension: 0.2 // Adjust the line curve
+                            },{
+                                label: 'Total Expenses',
+                                data: data3,
+                                fill: false,
+                                borderColor: 'rgb(192,75,93)', // Customize the line color
+                                tension: 0.2 // Adjust the line curve
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
                                 }
                             }
-                        });
-                    </script>
-                </div>
+                        }
+                    });
+                </script>
+            </div>
                 <div class="col-lg-3">
 {{--                    THIS MONTH INFORMATION--}}
                     <div class="card m-2 p-1">

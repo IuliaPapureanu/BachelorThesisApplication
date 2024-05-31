@@ -36,6 +36,7 @@ class Tag extends Model
 
     public static function getAllTagsBesidesTagsOfCompany($companyID){
         $tagIDsForCompany = CompanyTag::where('company_id',$companyID)->pluck('tag_id');
+//        dd($tagIDsForCompany);
         return self::getTags()
             ->whereNotIn('id', $tagIDsForCompany);
     }

@@ -34,6 +34,7 @@ class MessageController extends Controller
         $tag= $request->tag_id;
         $companies = Company::getByTag($tag)->get();
 
+//        dd('here');
         foreach ($companies as $company){
             $message = Message::create([
                 'subject' => $request->subject,

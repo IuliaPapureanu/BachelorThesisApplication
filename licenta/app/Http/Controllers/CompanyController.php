@@ -56,6 +56,7 @@ class CompanyController extends Controller
             return redirect()->route('dashboard')->with('status', 'route access denied');
         $allTagsOfCompany = Tag::getByCompany($company->id)->get();
         $allTagsNotAssigned = Tag::getAllTagsBesidesTagsOfCompany($company->id)->get();
+//        dd($allTagsNotAssigned);
 
         $balanceSheets = BalanceSheet::getCurrentYearBalanceSheets()->get();
         $balanceSheetsByMonth = collect(range(1, 12))->mapWithKeys(function ($month) use ($balanceSheets) {
@@ -121,7 +122,8 @@ class CompanyController extends Controller
         return redirect()->route('companies.show', ['company' => $company->id])->with('status', 'Tag assigned successfully');
     }
 
-    public function unassignTag(AssignTagToCompanyRequest $request,Company $company,Tag $tag){
+    public function unassignTag(Company $company,Tag $tag){
+//        dd('here');
         if (Auth::user()->level > 2 )
             return redirect()->route('dashboard')->with('status', 'route access denied');        $companytag = CompanyTag::getCompanyTag()
             ->where('company_id',$company->id)
@@ -161,6 +163,7 @@ class CompanyController extends Controller
         $lastIncome = $balanceSheetsByMonth->filter()->sortBy('month')->last()->income;
         $lastExpenses = $balanceSheetsByMonth->filter()->sortBy('month')->last()->expenses;
 
+//        dd($balanceSheets,$balanceSheetsByMonth,$yearlyProfit,$yearlyIncome,$yearlyExpenses, $lastProfit,$lastIncome,$lastExpenses);
         Mail::to($company->admin_email)->send(new MonthlyReport($balanceSheets,$balanceSheetsByMonth,$yearlyProfit,$yearlyIncome,$yearlyExpenses, $lastProfit,$lastIncome,$lastExpenses));
 
         return redirect()->route('companies.show', ['company' => $company->id])->with('status', 'Report sent');
